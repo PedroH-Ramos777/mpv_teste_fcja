@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Visualização Vertical</title>
+    
+    <style>
+        /* ----------------------------------
+        2. ESTILOS CSS PARA OTIMIZAÇÃO VERTICAL
+        ----------------------------------
+        */
+        
+        /* Estilos base (Mobile First) - aplicados a todas as telas, incluindo celulares */
+        body {
+            /* Remove margens padrão e define o modo de caixa para facilitar o layout */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            
+            /* Centraliza o conteúdo (o iframe) na tela */
+            display: flex;
+            flex-direction: column; /* Força o conteúdo a se empilhar verticalmente */
+            align-items: center;    /* Centraliza horizontalmente */
+            min-height: 100vh;      /* Garante que o corpo ocupe toda a altura visível */
+            background-color: #111111; /* Fundo escuro para destacar o vídeo */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container que envolve o iframe (opcional, mas bom para controle) */
+        .video-container {
+            /* Adiciona um pequeno espaço no topo */
+            margin-top: 20px; 
+            /* Para que o iframe ocupe a largura total disponível no celular (se for menor que 315px) */
+            max-width: 315px; 
+            width: 90%; 
+            /* Se quiser garantir que ele sempre fique na vertical, defina a proporção */
+            aspect-ratio: 9 / 16; 
+        }
+
+        /* Estiliza o iframe para que ele ocupe 100% da largura/altura de seu container */
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px; /* Adiciona um toque moderno */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 🔒 MEDIA QUERY PARA FORÇAR EXCLUSIVIDADE VERTICAL (OPCIONAL) */
+        /* Este código *oculta* o vídeo se o dispositivo for girado para o modo Paisagem (Horizontal). */
+        @media (orientation: landscape) {
+            body {
+                /* Oculta tudo na tela ou exibe uma mensagem */
+                min-height: 100vh;
+                background-color: #333333;
+            }
+            .video-container {
+                display: none; /* Oculta o vídeo se a tela estiver na horizontal */
+            }
+            body::before {
+                content: "Por favor, gire seu dispositivo para a vertical.";
+                color: white;
+                font-size: 18px;
+                text-align: center;
+                padding-top: 50px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/86u7wDlWlyw" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+</body>
+</html>
